@@ -38,4 +38,4 @@ def download_price_paid_data(year_from, year_to):
 
 def data():
     """Read the data from the web or local file, returning structured format such as a data frame"""
-    download_price_paid_data(1995, 2021)
+    download_price_paid_data(1995, 2024)
