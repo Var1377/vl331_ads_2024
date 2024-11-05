@@ -17,14 +17,22 @@ def download_price_paid_data(year_from, year_to):
     base_url = "http://prod.publicdata.landregistry.gov.uk.s3-website-eu-west-1.amazonaws.com"
     """Download UK house price data for given year range"""
     # File name with placeholders
-    file_name = "/pp-<year>-part<part>.csv"
+    filename_template = "/pp-<year>-part<part>.csv"
+
+
     for year in range(year_from, (year_to+1)):
         print (f"Downloading data for year: {year}")
         for part in range(1,3):
-            url = base_url + file_name.replace("<year>", str(year)).replace("<part>", str(part))
+            #if file exists then skip it
+            filename = "." + filename_template.replace("<year>", str(year)).replace("<part>", str(part))
+            if os.path.exists(filename):
+                print(f"File {filename} already exists. Skipping download")
+                continue
+
+            url = base_url + filename_template.replace("<year>", str(year)).replace("<part>", str(part))
             response = requests.get(url)
             if response.status_code == 200:
-                with open("." + file_name.replace("<year>", str(year)).replace("<part>", str(part)), "wb") as file:
+                with open(filename, "wb") as file:
                     file.write(response.content)
 
 
