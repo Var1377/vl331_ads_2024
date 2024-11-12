@@ -52,7 +52,7 @@ def count_pois_near_coordinates(latitude: float, longitude: float, tags: dict, d
 
     return poi_counts
 
-def cluster_locations(locations, n_clusters=3):
+def cluster_locations(locations, tags, n_clusters=3):
     """
     Cluster locations based on latitude and longitude.
     Args:
