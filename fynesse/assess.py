@@ -37,6 +37,8 @@ from sklearn.preprocessing import StandardScaler
 import osmnx as ox
 import matplotlib.pyplot as plt
 import warnings
+import pandas as pd
+import geopandas as gpd
 
 def count_pois_near_coordinates(latitude: float, longitude: float, tags: dict, distance_km: float = 1.0) -> dict:
     """
