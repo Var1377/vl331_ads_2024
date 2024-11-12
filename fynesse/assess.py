@@ -101,7 +101,7 @@ def cluster_locations(locations, tags, n_clusters=3):
     poi_counts_df['Cluster'] = kmeans.labels_
     return poi_counts_df
 
-def osm_buildings_data(lat, lon, distance=1000):
+def osm_buildings_data(latitude, longitude, distance=1000):
     # Define the tags to retrieve building information
     building_tags = {
         "building": True,
@@ -139,7 +139,7 @@ def osm_buildings_data(lat, lon, distance=1000):
 
     return buildings
 
-def select_pp_data(conn, lat, lon):
+def select_pp_data(conn, latitude, longitude):
     cursor = conn.cursor()
     cursor.execute("SELECT pp_data.postcode, latitude, longitude, primary_addressable_object_name, secondary_addressable_object_name, street FROM pp_data inner join postcode_data on pp_data.postcode = postcode_data.postcode WHERE latitude > %s and latitude < %s and longitude > %s AND longitude < %s", (latitude - 0.0045, latitude + 0.0045, longitude - 0.0045, longitude + 0.0045))
 
