@@ -69,7 +69,6 @@ def cluster_locations(locations, n_clusters=3):
 
     poi_counts_df = pd.DataFrame(location_poi_counts)
     poi_counts_df = poi_counts_df.set_index('Location')
-    poi_counts_df
 
     # Select features for clustering (exclude any non-numerical columns)
     features = poi_counts_df.select_dtypes(include=['number'])
@@ -147,7 +146,3 @@ def join_pp_osm(pp_data, osm_data):
     # remove duplicates
     # merged = merged.drop_duplicates()
     return merged
-
-
-
-
