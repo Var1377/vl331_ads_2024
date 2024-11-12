@@ -141,7 +141,7 @@ def osm_buildings_data(latitude, longitude, distance=1):
 
 def select_pp_data(conn, latitude, longitude):
     cursor = conn.cursor()
-    cursor.execute("SELECT pp_data.postcode, latitude, longitude, primary_addressable_object_name, secondary_addressable_object_name, street, price FROM pp_data inner join postcode_data on pp_data.postcode = postcode_data.postcode WHERE latitude > %s and latitude < %s and longitude > %s AND longitude < %s", (latitude - 0.0045, latitude + 0.0045, longitude - 0.0045, longitude + 0.0045))
+    cursor.execute("SELECT pp_data.postcode, latitude, longitude, primary_addressable_object_name, secondary_addressable_object_name, street, price, date_of_transfer FROM pp_data inner join postcode_data on pp_data.postcode = postcode_data.postcode WHERE latitude > %s and latitude < %s and longitude > %s AND longitude < %s", (latitude - 0.0045, latitude + 0.0045, longitude - 0.0045, longitude + 0.0045))
 
     # put into a dataframe
     pp_cambridge = pd.DataFrame(cursor.fetchall(), columns=[desc[0] for desc in cursor.description])
