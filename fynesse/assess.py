@@ -141,7 +141,7 @@ def osm_buildings_data(latitude, longitude, distance_km=1):
 
 def select_pp_data(conn, latitude, longitude):
     cursor = conn.cursor()
-    cursor.execute("SELECT pp_data.postcode, latitude, longitude, primary_addressable_object_name, secondary_addressable_object_name, street FROM pp_data inner join postcode_data on pp_data.postcode = postcode_data.postcode WHERE latitude > %s and latitude < %s and longitude > %s AND longitude < %s", (latitude - 0.0045, latitude + 0.0045, longitude - 0.0045, longitude + 0.0045))
+    cursor.execute("SELECT pp_data.postcode, latitude, longitude, primary_addressable_object_name, secondary_addressable_object_name, street, price FROM pp_data inner join postcode_data on pp_data.postcode = postcode_data.postcode WHERE latitude > %s and latitude < %s and longitude > %s AND longitude < %s", (latitude - 0.0045, latitude + 0.0045, longitude - 0.0045, longitude + 0.0045))
 
     # put into a dataframe
     pp_cambridge = pd.DataFrame(cursor.fetchall(), columns=[desc[0] for desc in cursor.description])
@@ -159,7 +159,5 @@ def join_pp_osm(pp_data, osm_data):
     merged = pd.concat([merged1, merged2])
 
     # get rid of NaN in the addr:housenumber and addr:street columns
-    merged = merged.dropna(subset=['addr:housenumber', 'addr:street'])[["addr:housenumber", "addr:street","postcode"]]
-    # remove duplicates
-    # merged = merged.drop_duplicates()
+    merged = merged.dropna(subset=['addr:housenumber', 'addr:street'])
     return merged
