@@ -1,2 +1,4 @@
 # csv files
 *.csv
+
+_notebooks/cache/*
