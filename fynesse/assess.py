@@ -101,7 +101,7 @@ def cluster_locations(locations, tags, n_clusters=3):
     poi_counts_df['Cluster'] = kmeans.labels_
     return poi_counts_df
 
-def osm_buildings_data(latitude, longitude, distance_km=1):
+def osm_buildings_data(latitude, longitude, distance=1):
     # Define the tags to retrieve building information
     building_tags = {
         "building": True,
