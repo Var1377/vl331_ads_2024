@@ -101,7 +101,7 @@ def cluster_locations(locations, tags, n_clusters=3):
     poi_counts_df['Cluster'] = kmeans.labels_
     return poi_counts_df
 
-def osm_buildings_data(latitude, longitude, distance=1):
+def osm_buildings_data(latitude, longitude, distance_km=1):
     # Define the tags to retrieve building information
     building_tags = {
         "building": True,
@@ -148,13 +148,13 @@ def select_pp_data(conn, latitude, longitude):
     return pp_cambridge
 
 def join_pp_osm(pp_data, osm_data):
-    merged1 = pd.merge(pp_data, buildings, how='inner', 
+    merged1 = pd.merge(pp_data, osm_data, how='inner', 
          left_on=[pp_data['secondary_addressable_object_name'], pp_data['street'].str.lower()], 
-         right_on=[buildings['addr:housenumber'], buildings['addr:street'].str.lower()])
+         right_on=[osm_data['addr:housenumber'], osm_data['addr:street'].str.lower()])
 
-    merged2 = pd.merge(pp_data, buildings, how='inner', 
+    merged2 = pd.merge(pp_data, osm_data, how='inner', 
             left_on=[pp_data['primary_addressable_object_name'], pp_data['street'].str.lower()], 
-            right_on=[buildings['addr:housenumber'], buildings['addr:street'].str.lower()])
+            right_on=[osm_data['addr:housenumber'], osm_data['addr:street'].str.lower()])
 
     merged = pd.concat([merged1, merged2])
 
