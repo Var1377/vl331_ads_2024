@@ -2,3 +2,7 @@
 *.csv
 
 _notebooks/cache/*
+_notebooks/*.csv
+_notebooks/*.zip
+_notebooks/*.pbf
+_notebooks/*.geojson
