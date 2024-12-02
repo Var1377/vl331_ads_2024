@@ -6,3 +6,7 @@ _notebooks/cache
 **/*.zip
 **/*.pbf
 **/*.geojson
+**/*.shp
+**/*.gpkg
+
+osm_proc
