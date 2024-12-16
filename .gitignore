@@ -8,5 +8,8 @@ _notebooks/cache
 **/*.geojson
 **/*.shp
 **/*.gpkg
+**/*.dbf
+**/*.prj
+**/*.shx
 
 osm_proc
